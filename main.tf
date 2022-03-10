@@ -119,6 +119,11 @@ resource "aws_redshift_parameter_group" "this" {
   }
 
   tags = var.tags
+  
+  #TODO: find a better way of not updating the param group on each apply
+  lifecycle {
+    ignore_changes = [parameter]
+  }
 }
 
 resource "aws_redshift_subnet_group" "this" {
